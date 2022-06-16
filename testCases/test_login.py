@@ -15,9 +15,10 @@ class Test_001_Login:
     def test_homePageTitle(self, setup):
         self.driver = setup
         self.driver.implicitly_wait(25)
+
         self.driver.get(self.baseURL)
         act_title = self.driver.title
-        self.driver.close()
+        # self.driver.close()
         if act_title == "Login":
             assert True
         else:
@@ -26,6 +27,7 @@ class Test_001_Login:
     def test_login(self, setup):
         self.driver = setup
         self.driver.implicitly_wait(25)
+        self.driver.maximize_window()
         self.driver.get(self.baseURL)
 
         self.lp = LoginPage(self.driver)

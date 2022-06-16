@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as ec, wait
 from selenium.webdriver.support.ui import WebDriverWait
 
 class LoginPage:
-    textbox_username_xpath = "//body/div[1]/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[6]/form[1]/div[3]/div[1]/div[1]/div[1]/div[1]/input[1]"
+    textbox_username_xpath = "//input[@aria-label='Login' and @name='username']"
     button_login_xpath = "//button[@type='submit']"
     textbox_password_xpath = "//input[@aria-label='Password' and @type='password']"
     button_logout_xpath = "//header/div[2]/button[1]/span[1]"
