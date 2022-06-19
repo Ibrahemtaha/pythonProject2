@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 class ActiveAlertsSummary:
     button_deleteWidget_xpath = "//div[contains(@title, 'Active alerts summary')]//following-sibling::div//button[@title = 'Delete']"
-    button_editWidget_xpath = "//div[@title='Active alerts summary']//following-sibling::div//am-button//button[@class='am-button am-button_variant_ghost qa-button'][@title='Edit']"
+    button_editWidget_xpath = "//div[@title='Active alerts summary']//following-sibling::div//button[@title='Edit']"
     button_addWidget_xpath = "//button[@title=' Add widget '][@class='am-button am-button_variant_ghost qa-button']"
     input_search_xpath = "//input[@class='am-search-field__input']"
     div_activeAlertsWidget_xpath = "//div[@class='am-text am-text_body-accent'][@title='Active alerts summary']"
@@ -18,6 +18,9 @@ class ActiveAlertsSummary:
     iframe_xpath = "//iframe[@title='dashboard module']"
     widget_ActiveSummaryTitle_xpath = "//div[contains(@title, 'Active alerts summary')]"
     widget_ActivitiesTitle_xpath = "//div[contains(@title,'Activities')]"
+    EditInputTitle_ActiveSummary_Xpath = "//div[@class='am-input am-input_size_ qa-input']/input[@type='text']"
+    EditButtonDome_ActivSummary_Xpath = "//button[@type='submit'][@title=' Done ']"
+    TitleSpan_AcitveSummary_Xpath = "//div[contains(@class, 'qa-active-alerts-summary-widget')]//div[@class='am-widget-panel__title qa-title sortable-handle']/span"
     # button_cyprebProtection_xpath = "//body/div[1]/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/button[1]"
 
     def __init__(self, driver, wait):
@@ -52,7 +55,7 @@ class ActiveAlertsSummary:
         elem2 = self.driver.find_element(By.XPATH, self.widget_patchinstallationHistory_xpath)
         location = elem1.location
         print(elem1.location)
-        print(elem2.location)
+        #print(elem2.location)
         time.sleep(4)
         elem1.click()
         ActionChains(self.driver).drag_and_drop_by_offset(elem1, location['x']+50, location['y']+0).perform()
@@ -64,14 +67,28 @@ class ActiveAlertsSummary:
         print(elem1.location)
         print(elem2.location)
 
-    def editWidgetName(self):
-        print("Widget edited")
-        self.driver.find_element(By.XPATH, self. button_editWidget_xpath).click()
+    def editWidgetName(self, widget_nameNew):
+        print("Widget to be edited")
+        self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
+        self.driver.find_element(By.XPATH, self.button_editWidget_xpath).click()
+        self.driver.find_element(By.XPATH, self.EditInputTitle_ActiveSummary_Xpath).click()
+        self.wait.until(EC.visibility_of_element_located((By.XPATH, self.EditInputTitle_ActiveSummary_Xpath))).clear()
+        #self.driver.find_element(By.XPATH, self.EditInputTitle_ActiveSummary_Xpath).clear()
+        self.driver.find_element(By.XPATH, self.EditInputTitle_ActiveSummary_Xpath).send_keys(widget_nameNew)
+        self.driver.find_element(By.XPATH, self.EditButtonDome_ActivSummary_Xpath).click()
+        print("Widget has been edited")
+        newWidgetName = self.driver.find_element(By.XPATH, self.TitleSpan_AcitveSummary_Xpath).text
+        if newWidgetName == widget_nameNew:
+            assert True
+        else:
+            assert False
+
         # and Verify name entered if it's same
 
     def searchInput(self, widgetName):
-        self.driver.find_element(By.XPATH, self. input_searchButton_xpath).clear()
-        self.driver.find_element(By.XPATH, self. input_searchButton_xpath).send_keys(widgetName)
+        self.driver.find_element(By.XPATH, self.input_searchButton_xpath).clear()
+        self.driver.find_element(By.XPATH, self.input_searchButton_xpath).send_keys(widgetName)
+
 
     # 1 def filterWidget(self):
     # 2 def RedirectWidget(self):

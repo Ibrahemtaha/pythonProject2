@@ -67,6 +67,7 @@ class Test_001_Login:
         self.widget.deleteWidget("Active alerts summary")
         self.widget.addWidget("Active alerts summary")
         self.widget.moveWidget()
+        self.widget.editWidgetName("abcd")
 
     # def test_checkWidgetExsist(self, setup):
     #     self.widget = ActiveAlertsSummary(self.driver, self.wait)
