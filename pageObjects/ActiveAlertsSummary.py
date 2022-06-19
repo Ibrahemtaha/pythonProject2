@@ -8,13 +8,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 class ActiveAlertsSummary:
     button_deleteWidget_xpath = "//div[contains(@title, 'Active alerts summary')]//following-sibling::div//button[@title = 'Delete']"
-    button_editWidget_xpath = "/html/body/am-app/am-dashboards/am-entry/div/am-dashboard-panel/div/am-scrollbar/div[2]/div/div/div/div/div/div/div[1]/am-widget-panel/div/am-widget-header/div/div[2]/div[1]/am-button/button"
-    button_addWidget_xpath = "/html/body/am-app/am-dashboards/am-entry/div/am-dashboard-panel/div/div[2]/am-dashboard-toolbar/div/div[2]/div[1]/am-button/button"
+    button_editWidget_xpath = "//div[@title='Active alerts summary']//following-sibling::div//am-button//button[@class='am-button am-button_variant_ghost qa-button'][@title='Edit']"
+    button_addWidget_xpath = "//button[@title=' Add widget '][@class='am-button am-button_variant_ghost qa-button']"
     input_search_xpath = "//input[@class='am-search-field__input']"
     div_activeAlertsWidget_xpath = "//div[@class='am-text am-text_body-accent'][@title='Active alerts summary']"
-    widget_ActiveSummary_xpath = "//div[@class='am-widget-panel am-widget-panel_height_s am-widget-panel_pie_chart am-flex-container qa-active-alerts-summary-widget am-widget-panel_mode_edit']"
-    widget_Activities_xpath = "//div[@class='am-widget-panel am-widget-panel_height_s am-widget-panel_activity am-flex-container qa-activities-widget am-widget-panel_mode_edit']"
-    widget_patchinstallationHistory_xpath = "//div[@class='am-widget-panel am-widget-panel_height_u am-widget-panel_table am-flex-container qa-patch-install-history-table-widget am-widget-panel_mode_edit']"
+    widget_ActiveSummary_xpath = "//div[@title='Active alerts summary']"
+    widget_Activities_xpath = "//div[@title='Activities']"
+    widget_patchinstallationHistory_xpath = "//div[@title='Patch installation status']"
     iframe_xpath = "//iframe[@title='dashboard module']"
     widget_ActiveSummaryTitle_xpath = "//div[contains(@title, 'Active alerts summary')]"
     widget_ActivitiesTitle_xpath = "//div[contains(@title,'Activities')]"
@@ -35,6 +35,7 @@ class ActiveAlertsSummary:
         except Exception as E:
             print("Active summary does not exist")
             self.addWidget(widget_name)
+            self.deleteWidget(widget_name)
 
     def addWidget(self, widget_name):
         print("Adding new Widget")
@@ -54,9 +55,11 @@ class ActiveAlertsSummary:
         print(elem2.location)
         time.sleep(4)
         elem1.click()
-        # ActionChains(self.driver).drag_and_drop_by_offset(elem1, location['x']+100, location['y']+200).perform()
+        ActionChains(self.driver).drag_and_drop_by_offset(elem1, location['x']+50, location['y']+0).perform()
+        print("New Location = ")
+        print(elem1.location)
         # ActionChains(self.driver).click_and_hold(elem1).move_to_element(elem2).release().perform()
-        ActionChains(self.driver).drag_and_drop(elem1, elem2).perform()
+        #ActionChains(self.driver).drag_and_drop(elem1, elem2).perform()
         print("Widget moved")
         print(elem1.location)
         print(elem2.location)
