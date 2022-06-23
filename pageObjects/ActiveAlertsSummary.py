@@ -52,7 +52,7 @@ class ActiveAlertsSummary:
     def moveWidget(self):
         print("Widget Will move")
         elem1 = self.driver.find_element(By.XPATH, self.widget_ActiveSummary_xpath)
-        elem2 = self.driver.find_element(By.XPATH, self.widget_patchinstallationHistory_xpath)
+        #elem2 = self.driver.find_element(By.XPATH, self.widget_patchinstallationHistory_xpath)
         location = elem1.location
         print(elem1.location)
         #print(elem2.location)
@@ -65,7 +65,7 @@ class ActiveAlertsSummary:
         #ActionChains(self.driver).drag_and_drop(elem1, elem2).perform()
         print("Widget moved")
         print(elem1.location)
-        print(elem2.location)
+        #print(elem2.location)
 
     def editWidgetName(self, widget_nameNew):
         print("Widget to be edited")
@@ -77,13 +77,21 @@ class ActiveAlertsSummary:
         self.driver.find_element(By.XPATH, self.EditInputTitle_ActiveSummary_Xpath).send_keys(widget_nameNew)
         self.driver.find_element(By.XPATH, self.EditButtonDome_ActivSummary_Xpath).click()
         print("Widget has been edited")
+        # and Verify name entered if it's same
         newWidgetName = self.driver.find_element(By.XPATH, self.TitleSpan_AcitveSummary_Xpath).text
         if newWidgetName == widget_nameNew:
             assert True
         else:
             assert False
 
-        # and Verify name entered if it's same
+    def FilteringDisplayedData(self):
+        self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
+        self.driver.find_element(By.XPATH, self.button_editWidget_xpath).click()
+
+    # def RedirectionFromWidget(self):
+    ### 3) add is_displayed(), is_checked(), 
+    ## https://github.com/mathare/selenium-python-pytest-bdd/blob/32411eb32969a0914a633a5fecf0d7b0f98052b7/pages/form_authentication.py#L38
+
 
     def searchInput(self, widgetName):
         self.driver.find_element(By.XPATH, self.input_searchButton_xpath).clear()
@@ -105,7 +113,13 @@ class ActiveAlertsSummary:
 # assert url
 #relaod after page
 # yeild open once
-#modify expath + rauhl shetty
-# Use Logger instead of Print statemnts
 
-#1) first Problem => we have to SWRICH method inside iframe
+
+### 1) Important: Confirmation messages, both Text & CSS color background (Mathare)
+### 2) add assert text & CSS after each step, Verify Message and color
+# https://github.com/mathare/selenium-python-pytest-bdd/blob/32411eb32969a0914a633a5fecf0d7b0f98052b7/step_defs/test_form_authentication_page_steps.py
+### 2) Assert in one line as in (Mathare)
+### 3) add is_displayed(), is_checked(),is_selected() etc. (Mathare)
+### 4) Add Logger instead of ptint
+
+#1) first issue  => we have to SWRICH method inside iframe

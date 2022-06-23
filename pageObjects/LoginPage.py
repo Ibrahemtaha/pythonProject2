@@ -11,12 +11,21 @@ class LoginPage:
     button_logout_xpath = "//header/div[2]/button[1]/span[1]"
     button_cyprebProtection_xpath = "//body/div[1]/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/button[1]"
 
+    def PAGE_TITLE(self):
+        return (By.TAG_NAME, 'title')
+
     def __init__(self, driver):
         self.driver = driver
 
+    #def pageTitle(self):
+    #     return self.driver.getTitle()
+    #     return self.driver.find_element(By.tagName("title")).getText()
+    #     return self.driver.find_element(By.TAG_NAME, 'title').getText()
+    #     return self.driver.find_element(self.PAGE_TITLE).text
+
     def setUsername(self,username):
-        self.driver.find_element(By.XPATH, self. textbox_username_xpath).clear()
-        self.driver.find_element(By.XPATH, self. textbox_username_xpath).send_keys(username)
+        self.driver.find_element(By.XPATH, self.textbox_username_xpath).clear()
+        self.driver.find_element(By.XPATH, self.textbox_username_xpath).send_keys(username)
 
     def setPassword(self,password):
         self.driver.find_element(By.XPATH, self.textbox_password_xpath).clear()
@@ -31,6 +40,9 @@ class LoginPage:
     def clickCyProtect(self):
         self.driver.find_element(By.XPATH, self.button_cyprebProtection_xpath).click()
 
+
+### 1) Check title method, whcih one need to choose? how to build it? above
+### 2)
 
 #https://selenium-python.readthedocs.io/locating-elements.html
 # Check if the widget on the page -> if yes, then click delete

@@ -37,7 +37,8 @@ class Test_001_Login:
         self.lp.clickLogin()
         self.lp.clickCyProtect()
         act_title = self.driver.title
-        self.driver.close()
+        #self.driver.close()
+        #Make method for title => Here just assert
         if act_title == "Cyber Protect Console":
             assert True
         else:
