@@ -21,7 +21,10 @@ class ActiveAlertsSummary:
     EditInputTitle_ActiveSummary_Xpath = "//div[@class='am-input am-input_size_ qa-input']/input[@type='text']"
     EditButtonDome_ActivSummary_Xpath = "//button[@type='submit'][@title=' Done ']"
     TitleSpan_AcitveSummary_Xpath = "//div[contains(@class, 'qa-active-alerts-summary-widget')]//div[@class='am-widget-panel__title qa-title sortable-handle']/span"
-    # button_cyprebProtection_xpath = "//body/div[1]/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/button[1]"
+    AlertSeverityDropdown_ActiveSummary_Xpath = "//div[@class='am-dropdown__target qa-dropdown-target']//span[contains(text(),' Alert severity ')]"
+    AlerttypeDropdown_ActiveSummary_Xpath = "//div[@class='am-dropdown__target qa-dropdown-target']//span[contains(text(),' Alert type')]"
+    Warning_ActiveSummary_Xpath = "//span[@class='am-select__item_content am-text_ellipsis']//span[@title='Warning']"
+    isDetected_ActiveSummary_Xpath = "//span[@class='am-select__item_content am-text_ellipsis']//span[@title='A malicious process is detected']"
 
     def __init__(self, driver, wait):
         self.driver = driver
@@ -88,8 +91,21 @@ class ActiveAlertsSummary:
         self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
         self.driver.find_element(By.XPATH, self.button_editWidget_xpath).click()
 
-    # def RedirectionFromWidget(self):
-    ### 3) add is_displayed(), is_checked(), 
+
+    def RedirectionFromWidget(self):
+        print("123")
+        try:  ## IF OR =>  more than one
+            if (self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath)):
+                print("Active summary exist, Deleting the widget...")
+                self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
+                self.driver.find_element(By.XPATH, self.button_deleteWidget_xpath).click()
+                print("Widget has Deleted")
+        except Exception as E:
+            print("123")
+            ### Add logger
+            # + Is displayed()
+    ### 3) add is_displayed(), is_checked(),
+    ### Assert URL driver.current_url+ Page Title  .current_url
     ## https://github.com/mathare/selenium-python-pytest-bdd/blob/32411eb32969a0914a633a5fecf0d7b0f98052b7/pages/form_authentication.py#L38
 
 
@@ -118,7 +134,7 @@ class ActiveAlertsSummary:
 ### 1) Important: Confirmation messages, both Text & CSS color background (Mathare)
 ### 2) add assert text & CSS after each step, Verify Message and color
 # https://github.com/mathare/selenium-python-pytest-bdd/blob/32411eb32969a0914a633a5fecf0d7b0f98052b7/step_defs/test_form_authentication_page_steps.py
-### 2) Assert in one line as in (Mathare)
+### 2) Assert = in one line as in (Mathare)
 ### 3) add is_displayed(), is_checked(),is_selected() etc. (Mathare)
 ### 4) Add Logger instead of ptint
 

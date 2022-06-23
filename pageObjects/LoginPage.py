@@ -42,13 +42,15 @@ class LoginPage:
 
 
 ### 1) Check title method, whcih one need to choose? how to build it? above
-### 2)
+### 2) Assert in one line (as in Mathare code, is it recommended
 
 #https://selenium-python.readthedocs.io/locating-elements.html
 # Check if the widget on the page -> if yes, then click delete
 
 
 # yeild open once
+
+
 
 
 
