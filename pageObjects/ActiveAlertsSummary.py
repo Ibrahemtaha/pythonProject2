@@ -90,11 +90,14 @@ class ActiveAlertsSummary:
     def FilteringDisplayedData(self):
         self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
         self.driver.find_element(By.XPATH, self.button_editWidget_xpath).click()
+        ## to chose by value\ Visible Text \ by index
+        # \ BY TITLE => change Xpath
+        # \ Select \ Click
 
 
     def RedirectionFromWidget(self):
         print("123")
-        try:  ## IF OR =>  more than one
+        try:  ## IF OR =>  more than one option, to click on it
             if (self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath)):
                 print("Active summary exist, Deleting the widget...")
                 self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
@@ -131,11 +134,15 @@ class ActiveAlertsSummary:
 # yeild open once
 
 
+### 0) finish the last 2 steps
 ### 1) Important: Confirmation messages, both Text & CSS color background (Mathare)
 ### 2) add assert text & CSS after each step, Verify Message and color
 # https://github.com/mathare/selenium-python-pytest-bdd/blob/32411eb32969a0914a633a5fecf0d7b0f98052b7/step_defs/test_form_authentication_page_steps.py
 ### 2) Assert = in one line as in (Mathare)
 ### 3) add is_displayed(), is_checked(),is_selected() etc. (Mathare)
-### 4) Add Logger instead of ptint
+### 4) Add Logger instead of ptint - Part2 25 min + How to add multiple setLevel other than INFO
+# https://www.youtube.com/watch?v=y2Kz3QaZcVo&list=PLUDwpEzHYYLt2RzOb-_eafLAP0VSoyJhf&index=2
 
 #1) first issue  => we have to SWRICH method inside iframe
+
+# git add .;git commit -m "newer"; git push

@@ -2,6 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from utilities.readProperties import ReadConfig
+from utilities.customLogger import LogGen
 from pageObjects.LoginPage import LoginPage
 import time
 from selenium.webdriver.support import expected_conditions as EC
@@ -11,6 +12,8 @@ class Test_001_Login:
     baseURL = ReadConfig.getApplicationURL()
     username = ReadConfig.getUseremail()
     password = ReadConfig.getPassword()
+
+    logger = LogGen.loggen()
 
     def test_homePageTitle(self, setup):
         self.driver = setup
@@ -23,6 +26,8 @@ class Test_001_Login:
             assert True
         else:
             assert False
+        self.logger.info("********** Page title asserted *********")
+        # self.logger.debug("**********  DEEEBBBBUUUGGGG *********")
 
     def test_login(self, setup):
         self.driver = setup
@@ -31,6 +36,8 @@ class Test_001_Login:
         self.driver.get(self.baseURL)
 
         self.lp = LoginPage(self.driver)
+        assert self.lp.pageTitle() == "Login"
+
         self.lp.setUsername(self.username)
         self.lp.clickLogin()
         self.lp.setPassword(self.password)
@@ -43,3 +50,11 @@ class Test_001_Login:
             assert True
         else:
             assert False
+
+        self.driver.close()
+
+        #  act_title = self.driver.title
+        # if act_title == "Cyber Protect Console":
+        #     assert True
+        # else:
+        #     assert False
