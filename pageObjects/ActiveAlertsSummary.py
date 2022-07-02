@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 class ActiveAlertsSummary:
     button_deleteWidget_xpath = "//div[contains(@title, 'Active alerts summary')]//following-sibling::div//button[@title = 'Delete']"
     button_editWidget_xpath = "//div[@title='Active alerts summary']//following-sibling::div//button[@title='Edit']"
+    button_editWidgetabcd_xpath = "//div[@title='abcd']//following-sibling::div//button[@title='Edit']"
     button_addWidget_xpath = "//button[@title=' Add widget '][@class='am-button am-button_variant_ghost qa-button']"
     input_search_xpath = "//input[@class='am-search-field__input']"
     div_activeAlertsWidget_xpath = "//div[@class='am-text am-text_body-accent'][@title='Active alerts summary']"
@@ -17,6 +18,7 @@ class ActiveAlertsSummary:
     widget_patchinstallationHistory_xpath = "//div[@title='Patch installation status']"
     iframe_xpath = "//iframe[@title='dashboard module']"
     widget_ActiveSummaryTitle_xpath = "//div[contains(@title, 'Active alerts summary')]"
+    widget_ActiveSummaryTitleabcd_xpath = "//div[contains(@title, 'abcd')]"
     widget_ActivitiesTitle_xpath = "//div[contains(@title,'Activities')]"
     EditInputTitle_ActiveSummary_Xpath = "//div[@class='am-input am-input_size_ qa-input']/input[@type='text']"
     EditButtonDome_ActivSummary_Xpath = "//button[@type='submit'][@title=' Done ']"
@@ -24,7 +26,7 @@ class ActiveAlertsSummary:
     AlertSeverityDropdown_ActiveSummary_Xpath = "//div[@class='am-dropdown__target qa-dropdown-target']//span[contains(text(),' Alert severity ')]"
     AlerttypeDropdown_ActiveSummary_Xpath = "//div[@class='am-dropdown__target qa-dropdown-target']//span[contains(text(),' Alert type')]"
     Warning_ActiveSummary_Xpath = "//span[@class='am-select__item_content am-text_ellipsis']//span[@title='Warning']"
-    isDetected_ActiveSummary_Xpath = "//span[@class='am-select__item_content am-text_ellipsis']//span[@title='A malicious process is detected']"
+    isDetected_ActiveSummary_Xpath = "//span[@class='am-select__item_content am-text_ellipsis']//span[@title='Malware is detected and blocked (RTP)']"
 
     def __init__(self, driver, wait):
         self.driver = driver
@@ -88,12 +90,18 @@ class ActiveAlertsSummary:
             assert False
 
     def FilteringDisplayedData(self):
-        self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
-        self.driver.find_element(By.XPATH, self.button_editWidget_xpath).click()
-        ## to chose by value\ Visible Text \ by index
-        # \ BY TITLE => change Xpath
-        # \ Select \ Click
 
+        self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitleabcd_xpath).click()
+        self.driver.find_element(By.XPATH, self.button_editWidgetabcd_xpath).click()
+        self.driver.find_element(By.XPATH, self.AlertSeverityDropdown_ActiveSummary_Xpath).click()
+        self.driver.find_element(By.XPATH, self.Warning_ActiveSummary_Xpath).click()
+        self.driver.find_element(By.XPATH, self.AlertSeverityDropdown_ActiveSummary_Xpath).click()
+
+        self.driver.find_element(By.XPATH, self.AlerttypeDropdown_ActiveSummary_Xpath).click()
+        self.driver.find_element(By.XPATH, self.isDetected_ActiveSummary_Xpath).click()
+        self.driver.find_element(By.XPATH, self.AlerttypeDropdown_ActiveSummary_Xpath).click()
+
+        self.driver.find_element(By.XPATH, self.EditButtonDome_ActivSummary_Xpath).click()
 
     def RedirectionFromWidget(self):
         print("123")
@@ -138,11 +146,14 @@ class ActiveAlertsSummary:
 ### 1) Important: Confirmation messages, both Text & CSS color background (Mathare)
 ### 2) add assert text & CSS after each step, Verify Message and color
 # https://github.com/mathare/selenium-python-pytest-bdd/blob/32411eb32969a0914a633a5fecf0d7b0f98052b7/step_defs/test_form_authentication_page_steps.py
-### 2) Assert = in one line as in (Mathare)
 ### 3) add is_displayed(), is_checked(),is_selected() etc. (Mathare)
-### 4) Add Logger instead of ptint - Part2 25 min + How to add multiple setLevel other than INFO
-# https://www.youtube.com/watch?v=y2Kz3QaZcVo&list=PLUDwpEzHYYLt2RzOb-_eafLAP0VSoyJhf&index=2
 
-#1) first issue  => we have to SWRICH method inside iframe
+### 4) Optimize Code:
+# 1) Xpath not to use multiple Xpaths for same element, ex title abcd
+# 2) if the widget has different title, like abcd, the code will not work
+# 3) add is_displayed(), is_checked(),is_selected() etc. (Mathare)
+
+#1) first issu
+# e  => we have to SWRICH method inside iframe
 
 # git add .;git commit -m "newer"; git push

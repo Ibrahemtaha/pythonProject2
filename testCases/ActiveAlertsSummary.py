@@ -68,6 +68,7 @@ class Test_001_Login:
         self.widget.addWidget("Active alerts summary")
         self.widget.moveWidget()
         self.widget.editWidgetName("abcd")
+        self.widget.FilteringDisplayedData()
 
     # def test_checkWidgetExsist(self, setup):
     #     self.widget = ActiveAlertsSummary(self.driver, self.wait)
@@ -85,9 +86,9 @@ class Test_001_Login:
     #
     #
     # def test_teardown(self):
-    #     self.driver.close()
-    #     self.driver.quit()
-    #     print("Test Completed")
+        self.driver.close()
+        self.driver.quit()
+        print("Test Completed")
 
 
 
