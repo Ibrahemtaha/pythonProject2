@@ -4,21 +4,41 @@ from selenium.webdriver.support.wait import WebDriverWait
 from utilities.readProperties import ReadConfig
 from utilities.customLogger import LogGen
 from pageObjects.LoginPage import LoginPage
+from behave import *
+from selenium.webdriver.chrome.service import Service
 import time
 from selenium.webdriver.support import expected_conditions as EC
 
 
 class Test_001_Login:
-    baseURL = ReadConfig.getApplicationURL()
+    # baseURL = ReadConfig.getApplicationURL()
+    baseURL = "https://mc-vz7test20.do.acronis.fun/"
     username = ReadConfig.getUseremail()
     password = ReadConfig.getPassword()
 
     logger = LogGen.loggen()
 
-    def test_homePageTitle(self, setup):
-        self.driver = setup
-        self.driver.implicitly_wait(25)
 
+    @Given('User is on Login page')
+    def test_Display_Login_Page(self):
+        s = Service("C:\\Users\\Ibrahem.taha\\PycharmProjects\\pythonProject2\\drivers\\chromedriver.exe")
+        self.driver = webdriver.Chrome(service=s)
+        self.driver.implicitly_wait(25)
+        self.driver.get("https://mc-vz7test20.do.acronis.fun/")
+        # self.driver.get(self.baseURL)
+        time.sleep(5)
+
+        # self.driver.get("https://mc-vz7test20.do.acronis.fun/")
+    def test_Assert_Page_Title(self):
+        act_title = self.driver.title
+        # self.driver.close()
+        if act_title == "Login":
+            assert True
+        else:
+            assert False
+    def test_homePageTitle(self, setup):
+        # self.driver = setup
+        self.driver.implicitly_wait(25)
         self.driver.get(self.baseURL)
         act_title = self.driver.title
         # self.driver.close()
