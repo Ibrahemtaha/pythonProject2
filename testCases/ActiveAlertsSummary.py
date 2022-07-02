@@ -70,22 +70,6 @@ class Test_001_Login:
         self.widget.editWidgetName("abcd")
         self.widget.FilteringDisplayedData()
 
-    # def test_checkWidgetExsist(self, setup):
-    #     self.widget = ActiveAlertsSummary(self.driver, self.wait)
-    #     self.widget.deleteWidget()
-
-        # self.widget.editWidget()
-        # self.widget.addWidget()
-        # self.widget.searchInput()
-    #
-    #     act_title = self.driver.title
-    #     if act_title == "Cyber Protect Console":
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    #
-    # def test_teardown(self):
         self.driver.close()
         self.driver.quit()
         print("Test Completed")
