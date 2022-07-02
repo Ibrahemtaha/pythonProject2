@@ -29,7 +29,9 @@ class Test_001_Login:
         time.sleep(5)
 
         # self.driver.get("https://mc-vz7test20.do.acronis.fun/")
-    def test_Assert_Page_Title(self):
+
+    @And('title asserted "Login" "{act_title}"')
+    def test_Assert_Page_Title(self, act_title):
         act_title = self.driver.title
         # self.driver.close()
         if act_title == "Login":
