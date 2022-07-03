@@ -27,7 +27,8 @@ class ActiveAlertsSummary:
     AlerttypeDropdown_ActiveSummary_Xpath = "//div[@class='am-dropdown__target qa-dropdown-target']//span[contains(text(),' Alert type')]"
     Warning_ActiveSummary_Xpath = "//span[@class='am-select__item_content am-text_ellipsis']//span[@title='Warning']"
     isDetected_ActiveSummary_Xpath = "//span[@class='am-select__item_content am-text_ellipsis']//span[@title='Malware is detected and blocked (RTP)']"
-
+    MalicousURLtitle_ActiveSummary_Xpath = "//div/span[contains(@title, 'Malicious URL was blocked')]"
+    MalwareisDetectedtitle_ActiveSummary_Xpath = "div/span[contains(@title, 'Malware is detected and blocked (RTP)')]"
     def __init__(self, driver, wait):
         self.driver = driver
         self.wait   = wait
@@ -104,13 +105,18 @@ class ActiveAlertsSummary:
         self.driver.find_element(By.XPATH, self.EditButtonDome_ActivSummary_Xpath).click()
 
     def RedirectionFromWidget(self):
-        print("123")
+        print("RedirectionFromWidget")
+        option1 = self.driver.find_element(By.XPATH, self.MalicousURLtitle_ActiveSummary_Xpath)
+        option2 = self.driver.find_element(By.XPATH, self.MalwareisDetectedtitle_ActiveSummary_Xpath)
         try:  ## IF OR =>  more than one option, to click on it
-            if (self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath)):
-                print("Active summary exist, Deleting the widget...")
-                self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
-                self.driver.find_element(By.XPATH, self.button_deleteWidget_xpath).click()
-                print("Widget has Deleted")
+            if option1:
+                option1.click()
+            elif option2:
+                option2.click()
+                # print("Active summary exist, Deleting the widget...")
+                # self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
+                # self.driver.find_element(By.XPATH, self.button_deleteWidget_xpath).click()
+                # print("Widget has Deleted")
         except Exception as E:
             print("123")
             ### Add logger
