@@ -7,49 +7,51 @@ from pageObjects.LoginPage import LoginPage
 from behave import *
 from selenium.webdriver.chrome.service import Service
 import time
+from testCases.conftest import setup
 from selenium.webdriver.support import expected_conditions as EC
+
+baseURL = ReadConfig.getApplicationURL()
+username = ReadConfig.getUseremail()
+password = ReadConfig.getPassword()
+### Logger
+logger = LogGen.loggen()
+#### Importing setup
+# driver = setupClass.setup()
 
 
 class Test_001_Login:
-    # baseURL = ReadConfig.getApplicationURL()
-    baseURL = "https://mc-vz7test20.do.acronis.fun/"
-    username = ReadConfig.getUseremail()
-    password = ReadConfig.getPassword()
-
-    logger = LogGen.loggen()
-
-
-    @Given('User is on Login page')
+## First scenario
+    @Given('Lunch Chrome Browser')
     def test_Display_Login_Page(self):
-        s = Service("C:\\Users\\Ibrahem.taha\\PycharmProjects\\pythonProject2\\drivers\\chromedriver.exe")
-        self.driver = webdriver.Chrome(service=s)
-        self.driver.implicitly_wait(25)
-        self.driver.get("https://mc-vz7test20.do.acronis.fun/")
-        # self.driver.get(self.baseURL)
-        time.sleep(5)
+        setup(self)
+        self.driver.get(baseURL)
 
-        # self.driver.get("https://mc-vz7test20.do.acronis.fun/")
 
-    @And('title asserted "Login" "{act_title}"')
-    def test_Assert_Page_Title(self, act_title):
+    @Then('title should be "{expected_title}"')
+    def test_Assert_Page_Title(self, expected_title):
         act_title = self.driver.title
-        # self.driver.close()
-        if act_title == "Login":
-            assert True
-        else:
-            assert False
-    def test_homePageTitle(self, setup):
-        # self.driver = setup
-        self.driver.implicitly_wait(25)
-        self.driver.get(self.baseURL)
-        act_title = self.driver.title
-        # self.driver.close()
-        if act_title == "Login":
-            assert True
-        else:
-            assert False
-        self.logger.info("********** Page title asserted *********")
-        # self.logger.debug("**********  DEEEBBBBUUUGGGG *********")
+        assert act_title == expected_title
+
+## 2nd scenario
+    @When('User Enters first "{username}"')
+    def test_setUsername(self, username):
+        self.lp = LoginPage(self.driver)
+        self.lp.setUsername(username)
+
+    @When("User Click on Login Button")
+    def test_ClickLoginButton(self):
+        self.lp.clickLogin()
+
+    @When('User Enters "{password}"')
+    def test_setPassword(self, password):
+        self.lp.setPassword(password)
+
+    @When("User click on CyberProtect Button")
+    def test_CyberProtect_Button(self):
+        self.lp.clickCyProtect()
+
+    # @Then("User should be navigated to Dashboard")
+
 
     def test_login(self, setup):
         self.driver = setup
@@ -80,3 +82,11 @@ class Test_001_Login:
         #     assert True
         # else:
         #     assert False
+
+###
+#1) @And doesnt work
+#1) Params doesn't accept, like baseURL
+#2) Assset title And sysntax in feature + test
+#3) How to use the title method in methods
+#4) OPTIMIZE - isSelected(),
+#%) user title method from Page object to Assert in tests

@@ -2,11 +2,8 @@ from selenium import webdriver
 import pytest
 from selenium.webdriver.chrome.service import Service
 
-@pytest.fixture(scope='session')
-def setup():
+def setup(self):
     s = Service("C:\\Users\\Ibrahem.taha\\PycharmProjects\\pythonProject2\\drivers\\chromedriver.exe")
-    driver = webdriver.Chrome(service=s)
-    return driver
-
-    # driver = webdriver.Chrome("C:\\Users\\Ibrahem.taha\\PycharmProjects\\pythonProject2\\drivers\\chromedriver.exe")
-    # return driver
+    self.driver = webdriver.Chrome(service=s)
+    self.driver.implicitly_wait(25)
+    return self.driver
