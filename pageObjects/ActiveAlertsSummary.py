@@ -111,8 +111,12 @@ class ActiveAlertsSummary:
         try:  ## IF OR =>  more than one option, to click on it
             if option1:
                 option1.click()
+                ## Assert title
             elif option2:
                 option2.click()
+                ## Assert title
+            else:
+                print("Empty, Nothing to click at")
                 # print("Active summary exist, Deleting the widget...")
                 # self.driver.find_element(By.XPATH, self.widget_ActiveSummaryTitle_xpath).click()
                 # self.driver.find_element(By.XPATH, self.button_deleteWidget_xpath).click()

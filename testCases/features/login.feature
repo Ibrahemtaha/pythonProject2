@@ -1,7 +1,7 @@
 Feature: Login page
   Scenario: Users Logs into Application
     Given Lunch Chrome Browser
-    When Lunch
+#    When Lunch
     Then title should be "Login"
 
     When User Enters first "IbrahemCy21"

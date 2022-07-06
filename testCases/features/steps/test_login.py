@@ -21,48 +21,36 @@ logger = LogGen.loggen()
 
 
 class Test_001_Login:
-## First scenario
 
-    # @scenario('../features/login.feature','Users Logs into Application')
-    # def scenario(self):
-    #     pass
 
-    @given('Lunch Chrome Browser')
-    def test_Display_Login_Page(self):
-        setup(self)
-        self.driver.get(baseURL)
 
-    @when('Lunch')
-    def test_when(self):
-        pass
-
-    @then('title should be "{expected_title}"')
+    @Then('title should be "{expected_title}"')
     def test_Assert_Page_Title(self, expected_title):
         act_title = self.driver.title
         assert act_title == expected_title
 
-    @when('User Enters first "{username}"')
+    @When('User Enters first "{username}"')
     def test_setUsername(self, username):
         self.lp = LoginPage(self.driver)
         self.lp.setUsername(username)
 
-    @when("User Click on Login Button")
+    @When("User Click on Login Button")
     def test_ClickLoginButton(self):
         self.lp.clickLogin()
 
-    @when('User Enters "{password}"')
+    @When('User Enters "{password}"')
     def test_setPassword(self, password):
         self.lp.setPassword(password)
 
-    @when("User click on CyberProtect Button")
+    @When("User click on CyberProtect Button")
     def test_CyberProtect_Button(self):
         self.lp.clickCyProtect()
 
-    @then("User should be navigated to Dashboard")
+    @Then("User should be navigated to Dashboard")
     def test_Navigate_To_Dashboard(self):
         pass
 
-    @then('title should be here "{expected_title2}"')
+    @Then('title should be here "{expected_title2}"')
     def test_Navigate_To_Dashboard(self, expected_title2):
         act_title2 = self.driver.title
         assert act_title2 == expected_title2
@@ -75,3 +63,8 @@ class Test_001_Login:
 #%) user title method from Page object to Assert in tests
 #6) File Sturcutre
 #7) Change behae lib to pytest-bdd
+
+
+##8) Run test with Bahve AND Run Widget.py file with pytest
+# First fix Fixure issue first (Widget run amd Behave doens't run
+# 2nd: check can run behave and pytest widget file
